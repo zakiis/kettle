@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>io.github.zakiis</groupId>
+    <artifactId>zakiis-parent</artifactId>
+    <version>0.0.3</version>
+    <relativePath>../parent/pom.xml</relativePath>
+  </parent>
+  
+  <artifactId>zakiis-kettle</artifactId>
+  <name>zakiis-kettle</name>
+  <url>https://zakiis.github.io</url>
+  <description>kettle demo</description>
+  
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  
+  <dependencies>
+    <dependency>
+    	<groupId>io.github.zakiis</groupId>
+    	<artifactId>zakiis-spring</artifactId>
+    </dependency>
+    <dependency>
+	    <groupId>org.springframework.boot</groupId>
+	    <artifactId>spring-boot-starter</artifactId>
+    </dependency>
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-web</artifactId>
+	</dependency>
+	<dependency>
+	    <groupId>org.mybatis.spring.boot</groupId>
+	    <artifactId>mybatis-spring-boot-starter</artifactId>
+	</dependency>
+	<dependency>
+	    <groupId>mysql</groupId>
+	    <artifactId>mysql-connector-java</artifactId>
+	</dependency>
+	<dependency>
+	    <groupId>pentaho-kettle</groupId>
+	    <artifactId>kettle-core</artifactId>
+	    <exclusions>
+	    	<exclusion>
+	    		<groupId>org.springframework</groupId>
+	    		<artifactId>spring-expression</artifactId>
+	    	</exclusion>
+	    </exclusions>
+	</dependency>
+	<dependency>
+	    <groupId>pentaho-kettle</groupId>
+	    <artifactId>kettle-engine</artifactId>
+	    <exclusions>
+	    	<exclusion>
+	    		<groupId>com.fasterxml.jackson.core</groupId>
+	    		<artifactId>jackson-core</artifactId>
+	    	</exclusion>
+	    </exclusions>
+	</dependency>
+	<dependency>
+	    <groupId>pentaho-kettle</groupId>
+	    <artifactId>kettle-db</artifactId>
+	</dependency>
+	<dependency>
+	    <groupId>ch.qos.logback</groupId>
+	    <artifactId>logback-classic</artifactId>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/javax.validation/validation-api -->
+	<dependency>
+	    <groupId>javax.validation</groupId>
+	    <artifactId>validation-api</artifactId>
+	</dependency>
+	<dependency>
+	    <groupId>org.springframework.boot</groupId>
+	    <artifactId>spring-boot-autoconfigure</artifactId>
+	    <optional>true</optional>
+	</dependency>
+	<dependency>
+	    <groupId>org.springframework.boot</groupId>
+	    <artifactId>spring-boot-configuration-processor</artifactId>
+	    <optional>true</optional>
+	</dependency>
+	<dependency>
+	    <groupId>org.springframework.boot</groupId>
+	    <artifactId>spring-boot-starter-test</artifactId>
+	    <scope>test</scope>
+	</dependency>
+	
+  </dependencies>
+</project>
