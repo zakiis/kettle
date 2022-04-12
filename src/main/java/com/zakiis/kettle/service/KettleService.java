@@ -16,19 +16,24 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.zakiis.kettle.service.listener.KettleTransStatusListener;
+
 @Service
 @SuppressWarnings("deprecation")
 public class KettleService {
 	
 	@Autowired
 	KettleDatabaseRepository repository;
+	@Autowired
+	KettleTransStatusListener kettleTransStatusListener;
 	
 	Logger log = LoggerFactory.getLogger(KettleService.class);
 	
-	public boolean runTransform(String directory, String transformName, Map<String, String> params) throws KettleException {
+	public void runTransform(String directory, String transformName, Map<String, String> params) throws KettleException {
 		RepositoryDirectoryInterface directoryTree = repository.findDirectory(directory);
 		TransMeta transMeta = repository.loadTransformation(transformName, directoryTree, null, true, null);
 		Trans trans=new Trans(transMeta);
+		trans.addTransListener(kettleTransStatusListener);
 		if (params != null) {
 			for (Map.Entry<String, String> param: params.entrySet()) {
 				trans.setVariable(param.getKey(), param.getValue());
@@ -38,13 +43,7 @@ public class KettleService {
 			setCsvInputFileds(transMeta, params.get("inputFile"));
 		}
         trans.execute(null);
-        trans.waitUntilFinished();//等待直到数据结束 
-        if(trans.getErrors()>0){
-        	log.error("transformation {} got some error", transformName, trans.getErrors());
-            return false;
-        }else{ 
-            return true; 
-        } 
+//        trans.waitUntilFinished();//等待直到数据结束 
 	}
 	
 	private void setCsvInputFileds(TransMeta transMeta, String csvFileName) throws KettleException {
